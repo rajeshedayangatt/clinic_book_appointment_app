@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Doctor;
+use App\Models\Specelization;
 use Illuminate\Database\Seeder;
 use DB;
 
@@ -14,10 +16,22 @@ class SpecializationSeeder extends Seeder
      */
     public function run()
     {
-        foreach($this->specializationList() as $val) {
 
-            DB::table('specelizations')->insert($val);
-        }
+
+            foreach($this->specializationList() as $val) {
+
+
+                $specelizations = Specelization::where('title',$val['title'])->first();
+
+                if($specelizations === null) {
+
+                    DB::table('specelizations')->insert($val);
+
+                }
+
+            }
+
+
 
     }
 
@@ -29,7 +43,7 @@ class SpecializationSeeder extends Seeder
             ['title' => 'General Physician'],
             ['title' => 'Gynacologist'],
             ['title' => 'Nuroligist'],
-          
+
         ];
     }
 }

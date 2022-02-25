@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Doctor;
+use App\Models\Specelization;
 use Illuminate\Database\Seeder;
 use DB;
 
@@ -14,11 +16,24 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        
-        foreach($this->doctorsList() as $val) {
 
-            DB::table('doctors')->insert($val);
-        }
+
+            foreach($this->doctorsList() as $val) {
+
+                $doctors = Doctor::where('name',$val['name'])->first();
+
+                if($doctors === null) {
+
+                    $specelizations = Specelization::where('title',$val['specialization'])->first();
+
+                    $data = ['name' => $val['name'] , 'specialization' => $specelizations->id ];
+
+                    DB::table('doctors')->insert($data);
+
+                }
+
+            }
+
 
 
     }
@@ -27,13 +42,13 @@ class DoctorSeeder extends Seeder
     private function doctorsList() {
 
         return [
-            ['name' => 'jacob' , 'specialization' => '1'],
-            ['name' => 'Seetharam' , 'specialization' => '2'],
-            ['name' => 'Yachury' , 'specialization' => '1'],
-            ['name' => 'Manglan' , 'specialization' => '3'],
-            ['name' => 'Mary' , 'specialization' => '2'],
-            ['name' => 'Meera' , 'specialization' => '1'],
-            ['name' => 'Maya' , 'specialization' => '3'],
+            ['name' => 'jacob' , 'specialization' => 'General Physician'],
+            ['name' => 'Seetharam' , 'specialization' => 'Gynacologist'],
+            ['name' => 'Yachury' , 'specialization' => 'Nuroligist'],
+            ['name' => 'Manglan' , 'specialization' => 'Nuroligist'],
+            ['name' => 'Mary' , 'specialization' => 'Gynacologist'],
+            ['name' => 'Meera' , 'specialization' => 'Gynacologist'],
+            ['name' => 'Maya' , 'specialization' => 'Gynacologist'],
         ];
     }
 }
