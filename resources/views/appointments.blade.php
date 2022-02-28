@@ -97,7 +97,8 @@
                                 content += `<p><b>Patient Name</b>  : ${data[0].patient_name}</p>`;
                                 content += `<p><b>Information</b>: ${data[0].information}</p>`;
                                 content += `<p><b>Appointment Date </b>: ${data[0].appointment_date}</p>`;
-                                content += `<p><b>Appointment Time </b>: ${data[0].start_time}</p>`;
+                                content += `<p><b>Appointment Start Time </b>: ${data[0].start_time}</p>`;
+                                content += `<p><b>Appointment End Time </b>: ${data[0].end_time}</p>`;
 
                                 $("#content_modal").html(content);
                                 calendar.fullCalendar('refetchEvents');
